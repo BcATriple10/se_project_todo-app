@@ -56,11 +56,4 @@ class Todo {
   }
 }
 
-function generateTodo(values) {
-  const todo = new Todo(values);
-
-  const getView = todo.getView();
-  return getView;
-}
-
 export default Todo;

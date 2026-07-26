@@ -5,7 +5,7 @@ import Todo from "../components/Todo.js";
 
 const addTodoButton = document.querySelector(".button_action_add");
 const addTodoPopup = document.querySelector("#add-todo-popup");
-const addTodoForm = addTodoPopup.querySelector(".popup__form");
+const addTodoForm = document.forms["add-todo-form"];
 const addTodoCloseBtn = addTodoPopup.querySelector(".popup__close");
 const todosList = document.querySelector(".todos__list");
 const openModal = (modal) => {
@@ -34,9 +34,8 @@ addTodoCloseBtn.addEventListener("click", () => {
 
 addTodoForm.addEventListener("submit", (evt) => {
   evt.preventDefault();
-  const name = evt.target.name.value;
-  const dateInput = evt.target.date.value;
-
+  const name = addTodoForm.name.value;
+  const dateInput = addTodoForm.date.value;
   // Create a date object and adjust for timezone
   const date = new Date(dateInput);
   date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
@@ -45,6 +44,7 @@ addTodoForm.addEventListener("submit", (evt) => {
   const values = { name, date, id };
   renderTodo(values);
   closeModal(addTodoPopup);
+  newTodoValidator.resetValidation();
 });
 
 initialTodos.forEach((item) => {
